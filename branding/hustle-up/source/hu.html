@@ -1,0 +1,107 @@
+<!doctype html><meta charset="utf-8">
+<style>
+@font-face{font-family:Grandstander;src:url(fonts/Grandstander.ttf);font-weight:100 900}
+@font-face{font-family:Fredoka;src:url(fonts/Fredoka.ttf);font-weight:300 700}
+body{margin:0;background:#E9E2CF;font-family:Helvetica,Arial,sans-serif;width:1200px}
+h1{margin:0;padding:34px 50px 6px;font-size:30px;color:#2d2420}
+.row{display:flex;gap:24px;padding:16px 50px}
+.card{position:relative;width:255px;height:255px;border-radius:20px;overflow:hidden}
+.big{width:540px!important;height:360px!important}
+.cap{font-size:17px;font-weight:700;color:#2d2420;margin:8px 0 2px}.note{font-size:13px;color:#6a5a50;line-height:1.4}
+.word{position:absolute;white-space:nowrap;line-height:1}
+.l{display:inline-block;position:relative}.mk{display:inline-block;width:0;height:0}
+</style>
+<h1>Biểu tượng “Hu” — chữ H và u dính liền, font Grandstander</h1>
+<div class="row">
+ <div><div class="card big" id="m0" style="background:#FAF4D3"></div><div class="cap">Biểu tượng gốc</div><div class="note">Nét phải của H cũng là nét trái của u. Mắt ∧ và má hồng giống logo chính.</div></div>
+ <div><div class="card big" id="m1" style="background:#FAF4D3"></div><div class="cap">Cạnh logo chính</div><div class="note">Kiểm tra độ đồng bộ với logo ngang đã chốt.</div></div>
+</div>
+<div class="row">
+ <div><div class="card" id="c1" style="background:#FAF4D3"></div><div class="cap">Tròn đỏ</div><div class="note">Avatar, sticker.</div></div>
+ <div><div class="card" id="c2" style="background:#C4261D"></div><div class="cap">Tròn kem</div><div class="note">Dùng trên nền đỏ.</div></div>
+ <div><div class="card" id="c3" style="background:#FAF4D3"></div><div class="cap">Vuông bo góc</div><div class="note">Icon app, tem ly.</div></div>
+ <div><div class="card" id="c4" style="background:#fffdf3"></div><div class="cap">Thử cỡ nhỏ</div><div class="note">96 · 48 · 32 · 20 px.</div></div>
+</div>
+<script>
+const RED='#C4261D',BUT='#FAF4D3',CREAM='#FBF5E8';
+function ring(r,c){return [...Array(16)].map((_,k)=>{const a=k/16*2*Math.PI;return `${(Math.cos(a)*r).toFixed(1)}px ${(Math.sin(a)*r).toFixed(1)}px 0 ${c}`}).join(',')}
+const cv=document.createElement('canvas').getContext('2d');
+function ink(ch,font){cv.font=font;const m=cv.measureText(ch);return {l:-m.actualBoundingBoxLeft,r:m.actualBoundingBoxRight,a:m.actualBoundingBoxAscent,d:m.actualBoundingBoxDescent}}
+function word(card,text,{x,y,size,family,weight=400,color,bg,dy=[],rot=[],sc=[],ov=-0.02,space=.26}){
+  const w=document.createElement('div');w.className='word';w.style.cssText+=`left:${x}px;top:${y}px;font-size:${size}px;font-family:${family};font-weight:${weight};color:${color}`;
+  const mk=document.createElement('span');mk.className='mk';w.appendChild(mk);
+  const sh=ring(Math.max(2.5,size*0.028),bg);const spans=[];
+  [...text].forEach((ch,i)=>{const s=document.createElement('span');s.className='l';
+    if(ch===' '){s.style.width=space+'em';s.style.height='1px';}else{s.textContent=ch;s.style.textShadow=sh;s.style.marginRight=ov+'em';}
+    if((sc[i]||1)>1&&ch!==' '){const k=sc[i]-1;s.style.marginLeft=(k*0.3)+'em';s.style.marginRight=(ov+k*0.3)+'em';}
+    s.dataset.dy=dy[i]||0;s.dataset.rot=rot[i]||0;s.dataset.sc=sc[i]||1;
+    s.style.transform=`translateY(${dy[i]||0}em) rotate(${rot[i]||0}deg) scale(${sc[i]||1})`;s.style.transformOrigin='50% 80%';s.style.zIndex=i;s.dataset.ch=ch;w.appendChild(s);spans.push(s)});
+  card.appendChild(w);return {w,spans,size,family,weight,mk};
+}
+function center(card,o,dx=0,dyy=0){const cr=card.getBoundingClientRect(),r=o.w.getBoundingClientRect();o.w.style.left=(parseFloat(o.w.style.left)+(cr.left+cr.width/2-(r.left+r.width/2))+dx)+'px';o.w.style.top=(parseFloat(o.w.style.top)+dyy)+'px'}
+// untransformed ink box of span i + its transform params (card coords)
+function glyph(card,o,i){
+  const cr=card.getBoundingClientRect(), s=o.spans[i];
+  const base=o.mk.getBoundingClientRect().bottom-cr.top;
+  const m=ink(s.dataset.ch,`${o.weight} ${o.size}px ${o.family}`);
+  const left=s.offsetLeft+o.w.offsetLeft, sw=s.offsetWidth, top=s.offsetTop+o.w.offsetTop, sh=s.offsetHeight;
+  return {l:left+m.l,r:left+m.r,top:base-m.a,bot:base+m.d,base,
+          ox:left+sw*0.5, oy:top+sh*0.8, dy:+s.dataset.dy*o.size, rot:+s.dataset.rot, sc:+s.dataset.sc};
+}
+// draw a face on glyph g: everything in the glyph's own (untransformed) frame, then apply same transform as the letter
+function face(card,g,{color,blush,sw,spread=.56,ew=.34,lift=.26,bdx=.62,brx=.12,by=.32}){
+  const W=g.r-g.l,h=g.bot-g.top,cx=(g.l+g.r)/2;
+  const eW=W*ew,eH=eW*0.55,yC=g.top-h*lift;
+  let p='';[cx-W*spread/2,cx+W*spread/2].forEach(x=>{p+=`<path d="M${x-eW*0.46},${yC+eH*0.62} L${x},${yC-eH*0.62} L${x+eW*0.46},${yC+eH*0.62}"/>`});
+  let bl='';if(blush)[cx-W*bdx,cx+W*bdx].forEach(x=>bl+=`<ellipse cx="${x}" cy="${g.top+h*by}" rx="${W*brx}" ry="${W*brx*0.58}" fill="${blush}"/>`);
+  const T=`translate(${g.ox},${g.oy+g.dy}) rotate(${g.rot}) scale(${g.sc}) translate(${-g.ox},${-g.oy})`;
+  addSvg(card,`<g transform="${T}">${bl}<g fill="none" stroke="${color}" stroke-width="${sw/g.sc}" stroke-linecap="round" stroke-linejoin="round">${p}</g></g>`,blush?true:false);
+}
+function addSvg(card,inner,under){const d=document.createElementNS('http://www.w3.org/2000/svg','svg');d.setAttribute('width',card.clientWidth);d.setAttribute('height',card.clientHeight);d.style.cssText='position:absolute;left:0;top:0;overflow:visible;z-index:50;pointer-events:none';d.innerHTML=inner;card.appendChild(d)}
+// arc text above glyph g
+function arc(card,g,text,{size,color,R,gap=8,a1=345,ls=.16,startFrac=.5}){
+  g=sbox(g); const cx=(g.l+g.r)/2, topY=g.top; R=Math.max(R,(g.r-g.l)/2+gap); const cy=topY-gap+R; const id='p'+Math.random().toString(36).slice(2);
+  const yT=topY+(g.bot-g.top)*startFrac; const k=Math.max(-1,Math.min(1,(yT-cy)/R));
+  const r0=Math.PI-Math.asin(k), r1=a1*Math.PI/180;
+  const x0=cx+R*Math.cos(r0),y0=cy+R*Math.sin(r0),x1=cx+R*Math.cos(r1),y1=cy+R*Math.sin(r1);
+  const large=(r1-r0)>Math.PI?1:0;
+  addSvg(card,`<defs><path id="${id}" d="M${x0},${y0} A${R},${R} 0 ${large} 1 ${x1},${y1}"/></defs><text font-family="Fredoka" font-weight="600" font-size="${size}" fill="${color}" letter-spacing="${size*ls}" text-anchor="start"><textPath href="#${id}" startOffset="0">${text}</textPath></text>`);
+}
+function sbox(g){const sc=g.sc||1;return {...g,l:g.ox+(g.l-g.ox)*sc,r:g.ox+(g.r-g.ox)*sc,top:g.oy+(g.top-g.oy)*sc+g.dy,bot:g.oy+(g.bot-g.oy)*sc+g.dy,base:g.oy+(g.base-g.oy)*sc+g.dy,dy:0,sc:1}}
+function flat(card,text,x,y,size,color){const d=document.createElement('div');d.textContent=text;d.style.cssText=`position:absolute;left:${x}px;top:${y}px;font-family:Fredoka;font-weight:600;font-size:${size}px;letter-spacing:.14em;color:${color};white-space:nowrap;z-index:60`;card.appendChild(d)}
+function stage(card){const d=document.createElement('div');d.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:50% 50%';card.appendChild(d);return d}
+
+const RED2='#C4261D',BUT2='#FAF4D3',CREAM2='#FBF5E8';
+function shape(card,cx,cy,w,h,r,fill){const d=document.createElement('div');d.style.cssText=`position:absolute;left:${cx-w/2}px;top:${cy-h/2}px;width:${w}px;height:${h}px;border-radius:${r}px;background:${fill};z-index:0`;card.appendChild(d);return d}
+function upFace(card,o,col,blush,sw){face(card,glyph(card,o,0),{color:col,blush,sw,spread:.56,ew:.29,lift:.25,bdx:.3,brx:.11,by:.5});}
+function centerXY(card,o,dx=0,dy=0){const cr=card.getBoundingClientRect(),r=o.w.getBoundingClientRect();o.w.style.left=(parseFloat(o.w.style.left)+(cr.left+cr.width/2-(r.left+r.width/2))+dx)+'px';o.w.style.top=(parseFloat(o.w.style.top)+(cr.top+cr.height/2-(r.top+r.height/2))+dy)+'px'}
+
+
+// Hu ligature
+function hu(card,size,col,bg,blush,dx=0,dy=0){
+  const o=word(card,'Hu',{x:0,y:0,size,family:'Grandstander',weight:900,color:col,bg});
+  o.spans.forEach(s=>s.style.textShadow='none');
+  const H=glyph(card,o,0), U=glyph(card,o,1);
+  const stem=size*0.11; // stem width of Grandstander 900
+  const shift=(H.r-stem)-U.l; o.spans[1].style.marginLeft=shift+'px';
+  centerXY(card,o,dx,dy);
+  const Hn=glyph(card,o,0), Un=glyph(card,o,1); const fg={...Un,l:Hn.r-size*0.02};
+  face(card,fg,{color:col,blush,sw:size*0.062,spread:.56,ew:.36,lift:.28,bdx:.3,brx:.13,by:.52});
+  return o;
+}
+Promise.all(['900 80px Grandstander','600 20px Fredoka'].map(f=>document.fonts.load(f))).then(()=>{
+  hu(stage(document.getElementById('m0')),210,RED2,BUT2,'#F08A7E',0,14);
+  // with main logo
+  (function(){const card=stage(document.getElementById('m1'));
+    const g0=hu(card,92,RED2,BUT2,'#F08A7E',-150,8);
+    const o=word(card,'Hustle up',{x:0,y:0,size:52,family:'Grandstander',weight:900,color:RED2,bg:BUT2,dy:[0,0,0,0,0,0,0,-.03,-.08],sc:[1.2,1,1,1,1,1,1,1.2,1.2],rot:[0,0,0,0,0,0,0,-6,-6]});
+    o.spans.forEach((s,i)=>{const k=(+s.dataset.sc)-1;if(k>0){s.style.marginLeft=(k*.3)+'em';s.style.marginRight=(-.02+k*.3)+'em'}});
+    centerXY(card,o,70,16);
+    face(card,glyph(card,o,7),{color:RED2,blush:'#F08A7E',sw:5.5,spread:.56,ew:.29,lift:.25,bdx:.3,brx:.11,by:.5});
+    const g=sbox(glyph(card,o,0));flat(card,'study cafe',g.l+2,g.top-24,13,RED2);})();
+  (function(){const card=stage(document.getElementById('c1'));shape(card,127.5,127.5,210,210,105,RED2);hu(card,118,CREAM2,RED2,'#F6B3A3',0,10);})();
+  (function(){const card=stage(document.getElementById('c2'));shape(card,127.5,127.5,210,210,105,CREAM2);hu(card,118,RED2,CREAM2,'#F08A7E',0,10);})();
+  (function(){const card=stage(document.getElementById('c3'));shape(card,127.5,127.5,210,210,46,RED2);hu(card,118,CREAM2,RED2,'#F6B3A3',0,10);})();
+  document.body.dataset.done=1;
+});
+</script>
