@@ -84,7 +84,7 @@ footer{padding:40px 60px 60px;font-size:14px;color:var(--muted)}
 <div class="cap">A · Logo ngang (logo chính)</div><div class="note">Bảng hiệu ngang, ảnh bìa fanpage, đầu menu, hoá đơn, website.</div>
 <div class="grid g3" style="margin-top:28px">
  <div><div class="card" id="L2" style="height:340px;background:var(--butter)"></div><div class="cap">B · Logo dọc</div><div class="note">Bảng đứng, ly, túi giấy, standee, bài đăng vuông.</div></div>
- <div><div class="card" id="L3" style="height:340px;background:var(--butter)"></div><div class="cap">C · Biểu tượng “Hu”</div><div class="note">Ảnh đại diện, icon app, tem ly, con dấu, favicon. H và u dùng chung một nét.</div></div>
+ <div><div class="card" id="L3" style="height:340px;background:var(--butter)"></div><div class="cap">C · Biểu tượng “Hu”</div><div class="note">Ảnh đại diện, icon app, tem ly, con dấu, favicon. Chữ “u” nghiêng đè lên chân H như hai miếng sticker.</div></div>
  <div><div class="card" id="L4" style="height:340px;background:var(--butter)"></div><div class="cap">D · Gương mặt “u” <span class="tag">phụ</span></div><div class="note">Sticker, emoji, tem niêm phong, hoạ tiết. Không thay logo chính.</div></div>
 </div>
 </section>
@@ -223,7 +223,7 @@ fontsReady().then(()=>{
   const sm=$('SM');
   [[96,'Hu 96 px',0],[64,'Hu 64 px',0],[48,'Hu 48 px',0],[40,'Tối giản 40 px',1],[32,'Tối giản 32 px',1],[24,'Tối giản 24 px',1],[16,'Tối giản 16 px',1],[32,'Thường 32 px ✕',2]].forEach(([px,lb,mode])=>{
     const it=document.createElement('div');it.className='it';const c=document.createElement('div');c.className='card';c.style.cssText=`width:${px}px;height:${px}px;border-radius:0;overflow:visible;margin:0 auto 8px`;it.appendChild(c);it.appendChild(document.createTextNode(lb));sm.appendChild(it);
-    markHu(c,px/1.78,{col:C.cream,bg:C.red,blush:C.blushR,plate:C.red,plateSize:1.78,simple:mode===1});
+    markHu(c,px/1.95,{col:C.cream,bg:C.red,blush:C.blushR,plate:C.red,simple:mode===1});
     if(mode===2)it.style.color=C.red;});
   // color versions
   logoH($('V1'),76);

@@ -30,13 +30,15 @@ function glyph(card, o, i) {
 }
 function addSvg(card, inner) { const d = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); d.setAttribute('width', card.clientWidth); d.setAttribute('height', card.clientHeight); d.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;z-index:50;pointer-events:none'; d.innerHTML = inner; card.appendChild(d); return d }
 // mắt ∧ + má hồng, vẽ trong khung chưa biến đổi của chữ rồi áp cùng transform với chữ
-function face(card, g, { color, blush, sw, spread = .56, ew = .34, lift = .26, bdx = .62, brx = .12, by = .32 }) {
+// halo: màu viền sticker quanh mắt (thường = màu nền), haloW: độ dày viền mỗi bên (px)
+function face(card, g, { color, blush, sw, spread = .56, ew = .34, lift = .26, bdx = .62, brx = .12, by = .32, halo = null, haloW = 0 }) {
   const W = g.r - g.l, h = g.bot - g.top, cx = (g.l + g.r) / 2;
   const eW = W * ew, eH = eW * 0.55, yC = g.top - h * lift;
   let p = ''; [cx - W * spread / 2, cx + W * spread / 2].forEach(x => { p += `<path d="M${x - eW * 0.46},${yC + eH * 0.62} L${x},${yC - eH * 0.62} L${x + eW * 0.46},${yC + eH * 0.62}"/>` });
   let bl = ''; if (blush) [cx - W * bdx, cx + W * bdx].forEach(x => bl += `<ellipse cx="${x}" cy="${g.top + h * by}" rx="${W * brx}" ry="${W * brx * 0.58}" fill="${blush}"/>`);
   const T = `translate(${g.ox},${g.oy + g.dy}) rotate(${g.rot}) scale(${g.sc}) translate(${-g.ox},${-g.oy})`;
-  addSvg(card, `<g transform="${T}">${bl}<g fill="none" stroke="${color}" stroke-width="${sw / g.sc}" stroke-linecap="round" stroke-linejoin="round">${p}</g></g>`);
+  const hl = halo ? `<g fill="none" stroke="${halo}" stroke-width="${(sw + 2 * haloW) / g.sc}" stroke-linecap="round" stroke-linejoin="round">${p}</g>` : '';
+  addSvg(card, `<g transform="${T}">${bl}${hl}<g fill="none" stroke="${color}" stroke-width="${sw / g.sc}" stroke-linecap="round" stroke-linejoin="round">${p}</g></g>`);
 }
 function sbox(g) { const sc = g.sc || 1; return { ...g, l: g.ox + (g.l - g.ox) * sc, r: g.ox + (g.r - g.ox) * sc, top: g.oy + (g.top - g.oy) * sc + g.dy, bot: g.oy + (g.bot - g.oy) * sc + g.dy, base: g.oy + (g.base - g.oy) * sc + g.dy, dy: 0, sc: 1 } }
 function flat(card, text, x, y, size, color) { const d = document.createElement('div'); d.className = 'flat'; d.textContent = text; d.style.cssText = `position:absolute;left:${x}px;top:${y}px;font-family:Fredoka;font-weight:600;font-size:${size}px;line-height:1.2;letter-spacing:.14em;color:${color};white-space:nowrap;z-index:60`; card.appendChild(d); return d }
@@ -86,17 +88,15 @@ function logoV(card, s, { col = C.red, bg = C.butter, blush = C.blushL } = {}) {
   const g = sbox(glyph(st, h, 0)); flat(st, 'study cafe', g.l + s * 0.02, g.top - s * 0.385, s * 0.23, col);
   fit(card, st); return { st, o: h };
 }
-// Biểu tượng "Hu": H và u dính liền
-function markHu(card, size, { col = C.red, bg = C.butter, blush = C.blushL, simple = false, plate = null, plateR = 0.5, plateSize = 1.78 } = {}) {
-  const st = stage(card);
+// Biểu tượng "Hu" (phương án A, chọn 09/11/2026): H đứng thẳng, "u" nghiêng −6° đè lên chân H
+// như hai miếng sticker dán chồng. Hai mắt ∧ có viền cùng màu nền để tách khỏi chữ H.
+function markHu(card, size, { col = C.red, bg = C.butter, blush = C.blushL, simple = false, plate = null, plateR = 0.26, plateSize = 1.95 } = {}) {
+  const st = stage(card); const ground = plate || bg;
   if (plate) { const cr = card.getBoundingClientRect(); const P = size * plateSize; shape(st, cr.width / 2, cr.height / 2, P, P, P * plateR, plate); }
-  const o = track(word(st, 'Hu', { size, family: 'Grandstander', weight: 900, color: col, bg }));
-  o.spans.forEach(s => s.style.textShadow = 'none');
-  const H = glyph(st, o, 0), U = glyph(st, o, 1);
-  const stem = size * 0.11; o.spans[1].style.marginLeft = ((H.r - stem) - U.l) + 'px';
-  centerXY(st, o, 0, size * 0.085);
-  const Hn = glyph(st, o, 0), Un = glyph(st, o, 1); const fg = { ...Un, l: Hn.r - size * 0.02 };
-  face(st, fg, { color: col, blush: simple ? null : blush, sw: size * (simple ? 0.095 : 0.062), spread: .56, ew: simple ? .42 : .36, lift: .28, bdx: .3, brx: .13, by: .52 });
+  const o = track(word(st, 'Hu', { size, family: 'Grandstander', weight: 900, color: col, bg: ground, rot: [0, -6], dy: [0, -.02], sc: [1, 1.12], ov: -.14 }));
+  o.spans[1].style.marginLeft = '.03em';
+  if (plate) centerXY(st, o, size * .02, size * .12);
+  face(st, glyph(st, o, 1), { color: col, blush: simple ? null : blush, sw: size * (simple ? .095 : .07), spread: .56, ew: simple ? .38 : .31, lift: .25, bdx: .3, brx: .11, by: .5, halo: ground, haloW: Math.max(2.5, size * 0.028) * (simple ? .7 : 1) });
   if (!plate) fit(card, st);
   return { st, o };
 }

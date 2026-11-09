@@ -9,7 +9,7 @@ type: master
 
 # Hustle Up
 
-> **Trạng thái các mục.** **Bộ logo chưa chốt**: biểu tượng “Hu” đang được chọn lại (xem `NOTES.md`). Màu, font Grandstander và Fredoka theo hướng đang dùng.
+> **Trạng thái các mục.** Biểu tượng “Hu” đã chọn phương án A (sticker chồng); cả bộ logo chờ chủ quán xác nhận chốt lần cuối. Màu, font Grandstander và Fredoka theo hướng đang dùng.
 > Mọi thứ khác (định vị, tính cách, tagline, giọng văn, font Nunito, tuyên bố) là **đề xuất**,
 > viết từ những gì đã biết về quán và chờ chủ quán duyệt. Mục nào được duyệt thì xoá chữ “đề xuất”.
 
@@ -169,7 +169,7 @@ Tất cả là **đề xuất**. Mỗi câu dựa vào chữ “up” hoặc gư
 Đã chốt. File gốc và quy tắc chi tiết: `final/huong-dan-nhan-dien.png` (hoặc `.pdf`), PNG từng biến thể trong `final/logo/`, mã dựng trong `source/`.
 
 - **Logo chính (ngang):** “Hustle up” font Grandstander 900, chữ H và “up” lớn hơn 1,2 lần, “up” nghiêng −6°; chữ “u” của “up” có hai mắt ∧ (mũi tên đi lên) và hai má hồng; “study cafe” font Fredoka 600 chữ thường nằm trên “Hustle”, canh trái theo chữ H. Mỗi chữ có viền cùng màu nền như sticker cắt rời.
-- **Biến thể:** logo dọc (study cafe / Hustle / up); biểu tượng “Hu” (H và u dùng chung một nét, có mặt); gương mặt chữ “u” (phụ, cho sticker và tem).
+- **Biến thể:** logo dọc (study cafe / Hustle / up); biểu tượng “Hu” (H đứng thẳng, “u” nghiêng −6° đè lên chân H như hai miếng sticker; hai mắt ∧ có viền cùng màu nền để tách khỏi chữ H); gương mặt chữ “u” (phụ, cho sticker và tem).
 - **Khoảng trống:** tối thiểu bằng chiều cao chữ “u” trong “Hustle”, tính từ mép mắt ∧ và chân chữ “p”.
 - **Cỡ nhỏ nhất:** logo ngang rộng 35 mm / 160 px; logo dọc 25 mm / 110 px; “Hu” 10 mm / 48 px; dưới mức đó dùng “Hu” tối giản (bỏ má hồng, mắt dày hơn; **đề xuất**).
 - **Phối màu được phép:** đỏ trên vàng bơ (chính); kem trên đỏ (đảo màu); nâu đậm một màu và đen một màu cho in một màu (**đề xuất**).

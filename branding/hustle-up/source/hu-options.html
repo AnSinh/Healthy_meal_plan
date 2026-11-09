@@ -54,7 +54,7 @@ function plate(st,card,w,h,r,fill){const cr=card.getBoundingClientRect();return 
 function stickerHu(st,size,col,bg,blush,small,dx=0,dy=0){
   const o=track(word(st,'Hu',{size,family:'Grandstander',weight:900,color:col,bg,rot:[0,-6],dy:[0,-.02],sc:[1,1.12],ov:-.14}));
   o.spans[1].style.marginLeft='.03em';centerXY(st,o,dx,dy);
-  face(st,glyph(st,o,1),{color:col,blush:small?null:blush,sw:size*(small?.095:.07),spread:.56,ew:small?.38:.31,lift:.25,bdx:.3,brx:.11,by:.5});
+  face(st,glyph(st,o,1),{color:col,blush:small?null:blush,sw:size*(small?.095:.07),spread:.56,ew:small?.38:.31,lift:.25,bdx:.3,brx:.11,by:.5,halo:bg,haloW:Math.max(2.5,size*.028)*(small?.7:1)});
   return o;}
 // ===== A. Sticker chồng =====
 function optA(card,size,{col=C.red,bg=C.butter,blush=C.blushL,pl=null,small=false}={}){const st=stage(card);
@@ -62,7 +62,7 @@ function optA(card,size,{col=C.red,bg=C.butter,blush=C.blushL,pl=null,small=fals
   const o=track(word(st,'Hu',{size,family:'Grandstander',weight:900,color:col,bg:pl||bg,rot:[0,-6],dy:[0,-.02],sc:[1,1.12],ov:-.14}));
   o.spans[1].style.marginLeft='.03em';
   if(pl)centerXY(st,o,size*.02,size*.12);
-  face(st,glyph(st,o,1),{color:col,blush:small?null:blush,sw:size*(small?.095:.07),spread:.56,ew:small?.38:.31,lift:.25,bdx:.3,brx:.11,by:.5});
+  face(st,glyph(st,o,1),{color:col,blush:small?null:blush,sw:size*(small?.095:.07),spread:.56,ew:small?.38:.31,lift:.25,bdx:.3,brx:.11,by:.5,halo:pl||bg,haloW:Math.max(2.5,size*.028)*(small?.7:1)});
   if(!pl)fit(card,st);}
 // ===== B. H mũi tên =====
 function optB(card,size,{col=C.red,bg=C.butter,blush=C.blushL,pl=null,small=false}={}){const st=stage(card);
