@@ -9,7 +9,7 @@ type: master
 
 # Hustle Up
 
-> **Trạng thái các mục.** Logo, màu, font Grandstander và Fredoka là quyết định **đã chốt** (xem `NOTES.md`).
+> **Trạng thái các mục.** **Bộ logo chưa chốt**: biểu tượng “Hu” đang được chọn lại (xem `NOTES.md`). Màu, font Grandstander và Fredoka theo hướng đang dùng.
 > Mọi thứ khác (định vị, tính cách, tagline, giọng văn, font Nunito, tuyên bố) là **đề xuất**,
 > viết từ những gì đã biết về quán và chờ chủ quán duyệt. Mục nào được duyệt thì xoá chữ “đề xuất”.
 

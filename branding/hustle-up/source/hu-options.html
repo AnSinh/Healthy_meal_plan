@@ -1,0 +1,142 @@
+<!doctype html><html lang="vi"><meta charset="utf-8">
+<style>
+@font-face{font-family:Grandstander;src:url(fonts/Grandstander.ttf);font-weight:100 900}
+@font-face{font-family:Fredoka;src:url(fonts/Fredoka.ttf);font-weight:300 700}
+@font-face{font-family:Nunito;src:url(fonts/nunito-vietnamese-wght-normal.woff2) format('woff2');font-weight:200 1000;unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:Nunito;src:url(fonts/nunito-latin-wght-normal.woff2) format('woff2');font-weight:200 1000;unicode-range:U+0000-00FF,U+2000-206F}
+body{margin:0;background:#EFE8D4;font-family:Nunito,sans-serif;color:#3A1F1A;width:1200px}
+h1{margin:0;padding:40px 50px 4px;font:900 36px Grandstander}
+.sub{padding:0 50px 10px;font-size:17px;color:#6E5A50}
+.row{display:grid;grid-template-columns:360px 260px 1fr;gap:22px;padding:22px 50px;align-items:start}
+.card{position:relative;border-radius:22px;overflow:hidden}
+.big{width:360px;height:300px;background:#FAF4D3}
+.mid{width:260px;height:300px}
+.txt h2{margin:6px 0 6px;font:900 28px Grandstander;color:#C4261D}
+.txt h2 span{color:#3A1F1A;font-size:22px;margin-right:8px}
+.txt p{margin:0 0 10px;font-size:16px;line-height:1.5;color:#5b4a42}
+.txt .tiny{display:flex;gap:18px;align-items:flex-end;margin-top:12px;font-size:12px;color:#6E5A50;font-weight:700}
+.txt .tiny div{text-align:center}
+.txt .tiny .c{position:relative;margin:0 auto 6px}
+.pro{font-size:14px!important}
+.pro b{color:#2E7D32}.pro i{font-style:normal;color:#C4261D;font-weight:800}
+hr{border:0;border-top:2px solid #0000000f;margin:0 50px}
+</style>
+<body>
+<h1>Biểu tượng “Hu” — 5 phương án mới</h1>
+<div class="sub">Cùng font Grandstander và gương mặt mắt ∧ của logo chính. Mỗi phương án: bản gốc · bản trên nền đỏ · thử cỡ thật 96 / 48 / 32 px.</div>
+<div id="rows"></div>
+<script src="scripts/logo-lib.js"></script>
+<script>
+const OPTS=[
+ {k:'A',name:'Sticker chồng',desc:'H đứng thẳng, chữ “u” nghiêng −6° đè lên chân H như hai miếng sticker dán chồng, có khe viền ở giữa. Giống hệt cách chữ “up” đứng trong logo chính.',pro:'<b>Hợp</b> logo chính nhất, dễ nhận ra. <i>Cần lưu ý:</i> khe viền mảnh, ở 32 px sẽ mất.'},
+ {k:'B',name:'H mũi tên',desc:'Thanh ngang của H bẻ thành dấu ∧, cùng hình với hai con mắt. Cả biểu tượng lặp lại một ý: đi lên. Chữ “u” đứng riêng bên cạnh.',pro:'<b>Hợp</b> ý “up” rõ nhất, hình học gọn. <i>Cần lưu ý:</i> nhìn nhanh dễ đọc nhầm thành “W”; thanh ngang phải vẽ tay.'},
+ {k:'C',name:'Ly trà sữa',desc:'Chữ “u” thành ly trà sữa có nắp vòm và ống hút, trân châu nằm dưới đáy (gợi trân châu quán nấu mỗi sáng). Gương mặt mắt ∧ khoét trên thân ly.',pro:'<b>Hợp</b> tem ly, menu, nói được sản phẩm. <i>Cần lưu ý:</i> nhiều chi tiết, cỡ nhỏ dễ rối; nghiêng về trà sữa hơn là học.'},
+ {k:'D',name:'Ô nguyên tố',desc:'Như một ô trong bảng tuần hoàn: số 10 (Quận 10) ở góc, “Hu” to ở giữa, chữ “Hustle” bên dưới. Đậm chất học bài, đọc là hiểu “study cafe”.',pro:'<b>Hợp</b> avatar, sticker, áo đồng phục; có câu chuyện riêng. <i>Cần lưu ý:</i> chữ nhỏ “10” và “Hustle” sẽ mất ở cỡ favicon.'},
+ {k:'E',name:'Con dấu tròn',desc:'“Hu” ở giữa, chữ chạy vòng “HUSTLE UP · STUDY CAFE · VĨNH VIỄN” như con dấu đóng lên ly, túi giấy, thẻ tích điểm.',pro:'<b>Hợp</b> đóng dấu, tem niêm phong, thẻ tích điểm. <i>Cần lưu ý:</i> ở cỡ nhỏ chỉ còn thấy “Hu”, chữ vòng cần ≥ 25 mm.'},
+];
+const rows=document.getElementById('rows');
+OPTS.forEach((o,i)=>{rows.insertAdjacentHTML('beforeend',`${i?'<hr>':''}<div class="row">
+ <div class="card big" id="${o.k}1"></div><div class="card mid" id="${o.k}2" style="background:${o.k==='D'||o.k==='E'?'#FAF4D3':'#C4261D'}"></div>
+ <div class="txt"><h2><span>${o.k}.</span>${o.name}</h2><p>${o.desc}</p><p class="pro">${o.pro}</p>
+ <div class="tiny">${[96,48,32].map(s=>`<div><div class="c" id="${o.k}s${s}" style="width:${s}px;height:${s}px"></div>${s} px</div>`).join('')}</div></div></div>`)});
+
+// "Hu" dính liền (như markHu nhưng trả về hình học)
+function lig(st,size,col,bg,{faceOn=true,blush=C.blushL,simple=false,dx=0,dy=0}={}){
+  const o=track(word(st,'Hu',{size,family:'Grandstander',weight:900,color:col,bg}));o.spans.forEach(s=>s.style.textShadow='none');
+  const H=glyph(st,o,0),U=glyph(st,o,1);o.spans[1].style.marginLeft=((H.r-size*.11)-U.l)+'px';centerXY(st,o,dx,dy);
+  const Hn=glyph(st,o,0),Un=glyph(st,o,1);const fg={...Un,l:Hn.r-size*.02};
+  if(faceOn)face(st,fg,{color:col,blush:simple?null:blush,sw:size*(simple?.095:.062),spread:.56,ew:simple?.42:.36,lift:.28,bdx:.3,brx:.13,by:.52});
+  return {o,Hn,Un:fg};
+}
+function plate(st,card,w,h,r,fill){const cr=card.getBoundingClientRect();return shape(st,cr.width/2,cr.height/2,w,h,r,fill)}
+
+// "Hu" kiểu sticker tách rời (dùng chung cho A, D, E)
+function stickerHu(st,size,col,bg,blush,small,dx=0,dy=0){
+  const o=track(word(st,'Hu',{size,family:'Grandstander',weight:900,color:col,bg,rot:[0,-6],dy:[0,-.02],sc:[1,1.12],ov:-.14}));
+  o.spans[1].style.marginLeft='.03em';centerXY(st,o,dx,dy);
+  face(st,glyph(st,o,1),{color:col,blush:small?null:blush,sw:size*(small?.095:.07),spread:.56,ew:small?.38:.31,lift:.25,bdx:.3,brx:.11,by:.5});
+  return o;}
+// ===== A. Sticker chồng =====
+function optA(card,size,{col=C.red,bg=C.butter,blush=C.blushL,pl=null,small=false}={}){const st=stage(card);
+  if(pl)plate(st,card,size*1.95,size*1.95,size*1.95*.26,pl);
+  const o=track(word(st,'Hu',{size,family:'Grandstander',weight:900,color:col,bg:pl||bg,rot:[0,-6],dy:[0,-.02],sc:[1,1.12],ov:-.14}));
+  o.spans[1].style.marginLeft='.03em';
+  if(pl)centerXY(st,o,size*.02,size*.12);
+  face(st,glyph(st,o,1),{color:col,blush:small?null:blush,sw:size*(small?.095:.07),spread:.56,ew:small?.38:.31,lift:.25,bdx:.3,brx:.11,by:.5});
+  if(!pl)fit(card,st);}
+// ===== B. H mũi tên =====
+function optB(card,size,{col=C.red,bg=C.butter,blush=C.blushL,pl=null,small=false}={}){const st=stage(card);
+  if(pl)plate(st,card,size*1.95,size*1.95,size*1.95*.5,pl);
+  // hai chân H lấy từ chữ "I" của font để giữ nét tay, "u" đứng sau
+  const o=track(word(st,'I I u',{size,family:'Grandstander',weight:900,color:col,bg:pl||bg,space:.3,ov:-.02}));
+  o.spans.forEach(s=>s.style.textShadow='none');
+  centerXY(st,o,0,size*.06);
+  const L1=glyph(st,o,0),L2=glyph(st,o,2),U=glyph(st,o,4);
+  // dời "u" sát lại
+  o.spans[4].style.marginLeft=(-(U.l-L2.r)+size*.08)+'px';
+  // chữ I và u cao bằng nhau: kéo u lên theo đỉnh I
+  centerXY(st,o,0,size*.06);
+  const a=glyph(st,o,0),b=glyph(st,o,2),u=glyph(st,o,4);
+  const sw=(a.r-a.l)*.7,x1=(a.l+a.r)/2,x2=(b.l+b.r)/2,yb=a.top+(a.bot-a.top)*.68,yt=a.top+(a.bot-a.top)*.34;
+  addSvg(st,`<path d="M${x1},${yb} L${(x1+x2)/2},${yt} L${x2},${yb}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>`);
+  face(st,u,{color:col,blush:small?null:blush,sw:size*(small?.095:.068),spread:.56,ew:small?.38:.31,lift:.25,bdx:.3,brx:.11,by:.5});
+  if(!pl)fit(card,st);}
+// ===== C. Ly trà sữa =====
+function optC(card,size,{col=C.red,bg=C.butter,blush=C.blushL,pl=null,small=false}={}){const st=stage(card);
+  if(pl)plate(st,card,size*1.95,size*1.95,size*1.95*.5,pl);
+  const hole=pl||bg;
+  const o=track(word(st,'H',{size,family:'Grandstander',weight:900,color:col,bg:hole}));o.spans.forEach(x=>x.style.textShadow='none');
+  centerXY(st,o,-size*.34,size*.12);const H=glyph(st,o,0);
+  const ch=H.bot-H.top, cw=ch*.86, x0=H.r+size*.07, x1=x0+cw, yt=H.top+ch*.04, yb=H.bot, tp=cw*.09, rr=cw*.3, mx=(x0+x1)/2;
+  let s='';
+  // ống hút
+  s+=`<path d="M${mx+cw*.02},${yt} L${mx+cw*.18},${yt-ch*.6} L${mx+cw*.42},${yt-ch*.66}" fill="none" stroke="${col}" stroke-width="${cw*.11}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  // nắp vòm + vành
+  s+=`<path d="M${x0+cw*.06},${yt} Q${mx},${yt-ch*.42} ${x1-cw*.06},${yt} Z" fill="${col}"/>`;
+  s+=`<rect x="${x0-cw*.05}" y="${yt-ch*.03}" width="${cw*1.1}" height="${ch*.12}" rx="${ch*.06}" fill="${col}"/>`;
+  // thân ly hình chữ u thuôn đáy
+  s+=`<path d="M${x0},${yt+ch*.06} L${x1},${yt+ch*.06} L${x1-tp},${yb-rr} Q${x1-tp},${yb} ${x1-tp-rr},${yb} L${x0+tp+rr},${yb} Q${x0+tp},${yb} ${x0+tp},${yb-rr} Z" fill="${col}" stroke="${col}" stroke-width="${cw*.06}" stroke-linejoin="round"/>`;
+  // mặt khoét
+  const ey=yt+ch*.42,eW=cw*.2;
+  s+=`<g fill="none" stroke="${hole}" stroke-width="${cw*(small?.13:.085)}" stroke-linecap="round" stroke-linejoin="round">`+[mx-cw*.19,mx+cw*.19].map(x=>`<path d="M${x-eW/2},${ey+eW*.3} L${x},${ey-eW*.3} L${x+eW/2},${ey+eW*.3}"/>`).join('')+`</g>`;
+  if(!small){[mx-cw*.31,mx+cw*.31].forEach(x=>s+=`<ellipse cx="${x}" cy="${ey+ch*.14}" rx="${cw*.08}" ry="${cw*.05}" fill="${blush}"/>`);
+    // trân châu ở đáy ly
+    [[-.18,.84],[0,.87],[.18,.84],[-.09,.73],[.09,.73]].forEach(([dx,dy])=>s+=`<circle cx="${mx+cw*dx}" cy="${yt+ch*dy}" r="${cw*.065}" fill="${hole}"/>`);}
+  addSvg(st,s);
+  if(!pl)fit(card,st);}
+// ===== D. Ô nguyên tố =====
+function optD(card,size,{col=C.cream,pl=C.red,blush=C.blushR,small=false}={}){const st=stage(card);const cr=card.getBoundingClientRect();
+  const P=size*2.05;plate(st,card,P,P,P*.14,pl);
+  stickerHu(st,size*.92,col,pl,blush,small,size*.03,size*.04);
+  if(!small){const x0=cr.width/2-P/2,y0=cr.height/2-P/2;
+    const t=(txt,x,y,fs,fam,w,anchor='start',ls=0)=>`<text x="${x}" y="${y}" font-family="${fam}" font-weight="${w}" font-size="${fs}" fill="${col}" text-anchor="${anchor}" letter-spacing="${ls}">${txt}</text>`;
+    addSvg(st,t('10',x0+P*.09,y0+P*.19,P*.13,'Grandstander',900)+t('Hustle',cr.width/2,y0+P*.9,P*.11,'Grandstander',900,'middle')+t('study cafe',x0+P*.91,y0+P*.17,P*.058,'Fredoka',600,'end',P*.006));}
+}
+// ===== E. Con dấu tròn =====
+function optE(card,size,{col=C.cream,pl=C.red,blush=C.blushR,small=false}={}){const st=stage(card);const cr=card.getBoundingClientRect();
+  const P=size*2.3;plate(st,card,P,P,P/2,pl);
+  stickerHu(st,size*(small?1.2:.95),col,pl,blush,small,size*.03,size*.12);
+  if(!small){const cx=cr.width/2,cy=cr.height/2,R=P*.385,id='e'+Math.random().toString(36).slice(2);
+    const txt='HUSTLE UP · STUDY CAFE · VĨNH VIỄN · ';
+    addSvg(st,`<circle cx="${cx}" cy="${cy}" r="${P*.47}" fill="none" stroke="${col}" stroke-width="${P*.012}"/><circle cx="${cx}" cy="${cy}" r="${P*.3}" fill="none" stroke="${col}" stroke-width="${P*.01}" stroke-dasharray="${P*.004} ${P*.03}" stroke-linecap="round"/>
+      <defs><path id="${id}" d="M${cx},${cy+R} a${R},${R} 0 1,1 0.01,0"/></defs>
+      <text font-family="Grandstander" font-weight="800" font-size="${P*.066}" fill="${col}" letter-spacing="${P*.008}"><textPath href="#${id}" textLength="${2*Math.PI*R-2}" lengthAdjust="spacing">${txt}</textPath></text>`);}
+}
+const F={A:optA,B:optB,C:optC,D:optD,E:optE};
+fontsReady().then(()=>{
+  const $=id=>document.getElementById(id);
+  F.A($('A1'),150);F.A($('A2'),95,{col:C.cream,blush:C.blushR,pl:C.red,bg:C.red});
+  F.B($('B1'),140);F.B($('B2'),95,{col:C.cream,blush:C.blushR,bg:C.red});
+  F.C($('C1'),130);F.C($('C2'),95,{col:C.cream,blush:C.blushR,bg:C.red});
+  F.D($('D1'),118);F.D($('D2'),100,{col:C.red,pl:C.cream,blush:C.blushL});
+  F.E($('E1'),106);F.E($('E2'),92,{col:C.red,pl:C.cream,blush:C.blushL});
+  // cỡ nhỏ: luôn là bản có nền tròn/vuông đỏ, bản rút gọn ở 48 và 32
+  [96,48,32].forEach(s=>{const sm=s<=48;
+    F.A($('As'+s),s/1.95,{col:C.cream,blush:C.blushR,pl:C.red,bg:C.red,small:sm});
+    (()=>{const c=$('Bs'+s);c.style.background=C.red;c.style.borderRadius='50%';F.B(c,s/2.3,{col:C.cream,bg:C.red,blush:C.blushR,small:sm})})();
+    (()=>{const c=$('Cs'+s);c.style.background=C.red;c.style.borderRadius='50%';F.C(c,s/2.1,{col:C.cream,bg:C.red,blush:C.blushR,small:sm})})();
+    F.D($('Ds'+s),s/2.05,{small:sm});F.E($('Es'+s),s/2.3,{small:sm});
+  });
+  document.body.dataset.done=1;
+});
+</script></body></html>

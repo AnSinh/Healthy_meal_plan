@@ -2,7 +2,10 @@
 
 Tóm tắt các quyết định đã chốt, để phiên làm việc sau tiếp tục được ngay.
 
-## Đã chốt
+## Trạng thái (09/11/2026)
+**Bộ logo CHƯA chốt.** Chủ quán chưa ưng biểu tượng "Hu" dính liền. Đang chọn giữa 5 phương án mới trong `explorations/hu-5-phuong-an-moi.png` (A sticker chồng, B H mũi tên, C ly trà sữa, D ô nguyên tố, E con dấu tròn). Sau khi chọn, cập nhật hướng dẫn nhận diện, `final/logo/` và `BRAND.md`.
+
+## Hướng đang dùng (chưa chốt)
 
 **Logo chính: phương án 2** (`final/phuong-an-study-cafe.png`, hàng giữa)
 - Chữ "Hustle up" dùng font **Grandstander** (weight 900), không có dấu chấm cuối.
@@ -17,7 +20,7 @@ Tóm tắt các quyết định đã chốt, để phiên làm việc sau tiếp
 - Logo dọc: study cafe / Hustle / up, căn giữa, "up" to làm điểm nhấn.
 - Biểu tượng gương mặt chữ "u" trong hình tròn, và "up" trong ô vuông bo góc.
 
-**Biểu tượng "Hu"**: hướng 3, đang phát triển (`final/bieu-tuong-Hu.png`)
+**Biểu tượng "Hu" bản cũ** (chủ quán chưa ưng): hướng 3 (`final/bieu-tuong-Hu.png`)
 - Chữ H và chữ "u" của Grandstander dính liền: nét phải của H là nét trái của "u".
 - Mắt ∧ và má hồng đặt trên chữ "u". Có bản tròn đỏ, tròn kem, vuông bo góc, và bản thử cỡ nhỏ.
 - Chữ "u" để thẳng (không nghiêng) để nét chung với H khít.
@@ -55,6 +58,7 @@ Tóm tắt các quyết định đã chốt, để phiên làm việc sau tiếp
 ## Ghi chú kỹ thuật
 - Các file HTML trong `source/` dựng logo bằng font thật và SVG. Mở trong trình duyệt là xem được.
 - Xuất lại ảnh PNG (cần Playwright): `cd branding/hustle-up/source && node scripts/brand.js` (tương tự `hu.js`, `face9.js`).
+- 5 phương án "Hu" mới: `node scripts/hu-options.js` (`hu-options.html`).
 - Hướng dẫn nhận diện: `node scripts/guideline.js`; PNG từng logo: `node scripts/export.js`. Cả hai dùng chung `scripts/logo-lib.js`.
 - `explorations/`: các hướng đã thử và bỏ (pixel 8-bit, Cosy Kiln, Tate, tem gợn sóng, tem tròn...).
 - `reference/logo-cu.jpg`: logo hiện tại của quán.
