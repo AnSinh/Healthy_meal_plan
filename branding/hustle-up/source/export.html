@@ -1,0 +1,37 @@
+<!doctype html><html lang="vi"><meta charset="utf-8">
+<style>
+@font-face{font-family:Grandstander;src:url(fonts/Grandstander.ttf);font-weight:100 900}
+@font-face{font-family:Fredoka;src:url(fonts/Fredoka.ttf);font-weight:300 700}
+body{margin:0;background:transparent;width:1400px}
+.card{position:relative;overflow:hidden;margin:0 0 20px}
+</style>
+<body>
+<div id="host"></div>
+<script src="scripts/logo-lib.js"></script>
+<script>
+// Mỗi file: [tên, rộng, cao, hàm vẽ]. Viền sticker lấy màu nền dự kiến, nên bản trong suốt
+// phải đặt trên đúng màu nền đó (vàng bơ cho bản đỏ, đỏ cho bản kem).
+const RED={col:C.red,bg:C.butter,blush:C.blushL}, REV={col:C.cream,bg:C.red,blush:C.blushR};
+const BRN={col:C.brown,bg:C.cream,blush:null}, BLK={col:'#111111',bg:'#ffffff',blush:null};
+const jobs=[
+ ['logo-ngang-do',760,300,c=>logoH(c,120,RED)],
+ ['logo-ngang-kem',760,300,c=>logoH(c,120,REV)],
+ ['logo-ngang-nau-1mau',760,300,c=>logoH(c,120,BRN)],
+ ['logo-ngang-den-1mau',760,300,c=>logoH(c,120,BLK)],
+ ['logo-doc-do',500,520,c=>logoV(c,104,RED)],
+ ['logo-doc-kem',500,520,c=>logoV(c,104,REV)],
+ ['bieu-tuong-Hu-do',360,300,c=>markHu(c,200,RED)],
+ ['bieu-tuong-Hu-kem',360,300,c=>markHu(c,200,REV)],
+ ['bieu-tuong-Hu-tron-do',400,400,c=>markHu(c,200,{...REV,plate:C.red})],
+ ['bieu-tuong-Hu-tron-kem',400,400,c=>markHu(c,200,{...RED,bg:C.cream,plate:C.cream})],
+ ['bieu-tuong-Hu-vuong-do',400,400,c=>markHu(c,200,{...REV,plate:C.red,plateR:.22})],
+ ['bieu-tuong-Hu-toi-gian',400,400,c=>markHu(c,200,{...REV,plate:C.red,simple:true})],
+ ['guong-mat-u-tron-do',400,400,c=>markU(c,200,{col:C.cream,bg:C.red,blush:C.blushR,plate:C.red,plateSize:1.8})],
+ ['guong-mat-u-tron-kem',400,400,c=>markU(c,200,{col:C.red,bg:C.cream,blush:C.blushL,plate:C.cream,plateSize:1.8})],
+];
+fontsReady().then(()=>{
+  const host=document.getElementById('host');
+  jobs.forEach(([n,w,h,f])=>{const c=document.createElement('div');c.className='card';c.id=n;c.style.width=w+'px';c.style.height=h+'px';host.appendChild(c);f(c)});
+  document.body.dataset.jobs=JSON.stringify(jobs.map(j=>j[0]));document.body.dataset.done=1;
+});
+</script></body></html>

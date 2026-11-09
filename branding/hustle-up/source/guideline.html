@@ -1,0 +1,243 @@
+<!doctype html><html lang="vi"><meta charset="utf-8">
+<title>Hustle Up — Hướng dẫn nhận diện</title>
+<style>
+@font-face{font-family:Grandstander;src:url(fonts/Grandstander.ttf);font-weight:100 900}
+@font-face{font-family:Fredoka;src:url(fonts/Fredoka.ttf);font-weight:300 700}
+@font-face{font-family:Nunito;src:url(fonts/nunito-vietnamese-wght-normal.woff2) format('woff2');font-weight:200 1000;unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:Nunito;src:url(fonts/nunito-latin-wght-normal.woff2) format('woff2');font-weight:200 1000;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--red:#C4261D;--butter:#FAF4D3;--cream:#FBF5E8;--brown:#3A1F1A;--page:#EFE8D4;--muted:#6E5A50}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);font-family:Nunito,sans-serif;color:var(--brown);width:1200px}
+section{padding:56px 60px 24px}
+.sec{display:flex;align-items:baseline;gap:18px;margin:0 0 6px}
+.num{font-family:Grandstander;font-weight:900;font-size:22px;color:var(--red)}
+h2{margin:0;font-family:Grandstander;font-weight:900;font-size:40px;letter-spacing:-.01em}
+.lead{font-size:18px;line-height:1.55;color:var(--muted);max-width:820px;margin:6px 0 26px}
+.card{position:relative;border-radius:22px;overflow:hidden}
+.cap{font-size:18px;font-weight:800;margin:12px 0 2px}
+.note{font-size:15px;color:var(--muted);line-height:1.45}
+.tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px;background:#fff6;border:1.5px solid currentColor;margin-left:8px;vertical-align:2px}
+.tag.p{color:#9A6B00}
+.grid{display:grid;gap:26px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+hr{border:0;border-top:2px solid #0000000f;margin:30px 60px 0}
+/* cover */
+.cover{height:620px;background:var(--butter);border-radius:0}
+.cover .meta{position:absolute;left:60px;bottom:44px;font-size:16px;color:var(--muted);z-index:99}
+.cover .meta b{color:var(--brown)}
+.cover .top{position:absolute;left:60px;top:44px;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red);z-index:99}
+/* concept */
+.idea{background:#fffdf4;border-radius:22px;padding:26px}
+.idea h3{margin:14px 0 6px;font-size:21px;font-weight:900}
+.idea p{margin:0;font-size:15.5px;line-height:1.5;color:var(--muted)}
+/* swatches */
+.sw{border-radius:20px;overflow:hidden;background:#fffdf4}
+.sw .chip{height:150px;position:relative}
+.sw .chip span{position:absolute;left:18px;bottom:14px;font-weight:900;font-size:20px}
+.sw .info{padding:14px 18px 18px;font-size:14.5px;line-height:1.55}
+.sw .info b{font-size:17px}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px}
+.bar{display:flex;height:70px;border-radius:16px;overflow:hidden;margin-top:6px}
+.bar div{display:flex;align-items:flex-end;padding:8px 12px;font-weight:800;font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:15.5px;background:#fffdf4;border-radius:18px;overflow:hidden}
+td,th{padding:11px 16px;text-align:left;border-bottom:1.5px solid #0000000c}
+th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ok{color:#2E7D32;font-weight:900}.no{color:var(--red);font-weight:900}
+.pill{display:inline-block;padding:4px 12px;border-radius:9px;font-weight:800}
+/* type */
+.spec{background:#fffdf4;border-radius:22px;padding:28px 30px;display:grid;grid-template-columns:240px 1fr;gap:26px;margin-bottom:20px}
+.spec .who{font-size:15px;line-height:1.5;color:var(--muted)}
+.spec .who b{display:block;font-size:22px;color:var(--brown);margin-bottom:4px}
+.warn{margin-top:10px;padding:10px 12px;border-radius:10px;background:#C4261D14;color:var(--red);font-weight:800;font-size:14px}
+/* don'ts */
+.dont .card{height:210px;background:var(--butter)}
+.dont .x{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;font:900 22px/34px Nunito;text-align:center;z-index:999}
+.dont .cap:before{content:"✕ ";color:var(--red)}
+/* clear space */
+.guide{position:absolute;pointer-events:none;z-index:200}
+.small-row{display:flex;align-items:flex-end;gap:34px;padding:26px 30px;background:#fffdf4;border-radius:22px}
+.small-row .it{text-align:center;font-size:13px;color:var(--muted);font-weight:700}
+footer{padding:40px 60px 60px;font-size:14px;color:var(--muted)}
+</style>
+<body>
+
+<!-- BÌA -->
+<div class="card cover" id="cover"><div class="top">Hướng dẫn nhận diện · bản 1.0</div>
+<div class="meta"><b>Hustle Up Study Cafe</b> · Vĩnh Viễn, Quận 10 · tháng 11/2026</div></div>
+
+<!-- 01 Ý TƯỞNG -->
+<section>
+<div class="sec"><span class="num">01</span><h2>Ý tưởng</h2></div>
+<p class="lead">Một quán học bài vui vẻ, không áp lực. Logo là chữ tay tròn trịa như sticker dán vở, và chữ “u” của “up” có gương mặt đang cười: hai mắt là hai mũi tên đi lên.</p>
+<div class="grid g3">
+ <div class="idea"><div class="card" id="i1" style="height:150px;background:var(--butter)"></div><h3>Mắt ∧ = mũi tên đi lên</h3><p>“Hustle up” là cố lên, tiến lên. Hai mắt hình chữ V úp ngược vừa là nụ cười híp mắt, vừa là hai mũi tên hướng lên.</p></div>
+ <div class="idea"><div class="card" id="i2" style="height:150px;background:var(--butter)"></div><h3>Má hồng = thân thiện</h3><p>Chăm chỉ nhưng dễ thương. Hai chấm má hồng làm chữ cái thành một nhân vật, dễ nhớ và dễ làm sticker.</p></div>
+ <div class="idea"><div class="card" id="i3" style="height:150px;background:var(--butter)"></div><h3>Chữ sticker, nét tròn</h3><p>Font Grandstander đậm, nét bo tròn, mỗi chữ có viền cùng màu nền như sticker cắt rời. Chữ “up” nghiêng nhẹ, như đang bật lên.</p></div>
+</div>
+</section>
+
+<!-- 02 BỘ LOGO -->
+<section>
+<div class="sec"><span class="num">02</span><h2>Bộ logo</h2></div>
+<p class="lead">Bốn dạng, cùng một hệ chữ và một gương mặt. Ưu tiên theo thứ tự: logo ngang → logo dọc → biểu tượng “Hu” → gương mặt “u”.</p>
+<div class="card" id="L1" style="height:340px;background:var(--butter)"></div>
+<div class="cap">A · Logo ngang (logo chính)</div><div class="note">Bảng hiệu ngang, ảnh bìa fanpage, đầu menu, hoá đơn, website.</div>
+<div class="grid g3" style="margin-top:28px">
+ <div><div class="card" id="L2" style="height:340px;background:var(--butter)"></div><div class="cap">B · Logo dọc</div><div class="note">Bảng đứng, ly, túi giấy, standee, bài đăng vuông.</div></div>
+ <div><div class="card" id="L3" style="height:340px;background:var(--butter)"></div><div class="cap">C · Biểu tượng “Hu”</div><div class="note">Ảnh đại diện, icon app, tem ly, con dấu, favicon. H và u dùng chung một nét.</div></div>
+ <div><div class="card" id="L4" style="height:340px;background:var(--butter)"></div><div class="cap">D · Gương mặt “u” <span class="tag">phụ</span></div><div class="note">Sticker, emoji, tem niêm phong, hoạ tiết. Không thay logo chính.</div></div>
+</div>
+</section>
+
+<!-- 03 KHOẢNG TRỐNG & CỠ NHỎ -->
+<section>
+<div class="sec"><span class="num">03</span><h2>Khoảng trống &amp; cỡ tối thiểu</h2></div>
+<p class="lead">Đơn vị <b>x</b> = chiều cao chữ “u” trong “Hustle”. Giữ trống ít nhất <b>1x</b> quanh logo (tính từ mắt ∧ và chân chữ “p”), không đặt chữ, hình hay mép giấy vào vùng này.</p>
+<div class="grid g2">
+ <div><div class="card" id="CS1" style="height:330px;background:var(--butter)"></div><div class="cap">Logo ngang · khoảng trống 1x</div></div>
+ <div><div class="card" id="CS2" style="height:330px;background:var(--butter)"></div><div class="cap">Biểu tượng “Hu” · khoảng trống 1x</div></div>
+</div>
+<div style="height:26px"></div>
+<table>
+<tr><th>Dạng</th><th>Màn hình</th><th>In ấn</th><th>Dưới mức này</th></tr>
+<tr><td><b>Logo ngang</b></td><td>rộng ≥ 160 px</td><td>rộng ≥ 35 mm</td><td>chuyển sang logo dọc hoặc “Hu”</td></tr>
+<tr><td><b>Logo dọc</b></td><td>rộng ≥ 110 px</td><td>rộng ≥ 25 mm</td><td>chuyển sang “Hu”</td></tr>
+<tr><td><b>Biểu tượng “Hu”</b></td><td>≥ 48 px</td><td>≥ 10 mm</td><td>dùng “Hu” tối giản</td></tr>
+<tr><td><b>“Hu” tối giản</b> <span class="tag p">đề xuất</span></td><td>16–40 px</td><td>6–10 mm</td><td>—</td></tr>
+</table>
+<div style="height:22px"></div>
+<div class="small-row" id="SM"></div>
+<div class="note" style="margin-top:10px">Bản “Hu” tối giản bỏ má hồng và làm nét mắt dày hơn để không bị nhoè ở favicon 16–32 px. Hiển thị đúng cỡ thật.</div>
+</section>
+
+<!-- 04 PHIÊN BẢN MÀU -->
+<section>
+<div class="sec"><span class="num">04</span><h2>Phiên bản màu</h2></div>
+<p class="lead">Logo chỉ xuất hiện ở bốn cách phối dưới đây. Viền sticker quanh chữ luôn cùng màu với nền phía sau.</p>
+<div class="grid g2">
+ <div><div class="card" id="V1" style="height:250px;background:var(--butter)"></div><div class="cap">Đỏ trên vàng bơ <span class="tag">chính</span></div><div class="note">Mặc định cho mọi ấn phẩm. Má hồng #F08A7E.</div></div>
+ <div><div class="card" id="V2" style="height:250px;background:var(--red)"></div><div class="cap">Kem trên đỏ <span class="tag">đảo màu</span></div><div class="note">Bảng hiệu, ly, túi, ảnh bìa nổi bật. Má hồng #F6B3A3.</div></div>
+ <div><div class="card" id="V3" style="height:250px;background:var(--cream)"></div><div class="cap">Nâu đậm một màu <span class="tag p">đề xuất</span></div><div class="note">Khi chỉ in được một màu tối: tem giấy kraft, khắc gỗ. Bỏ má hồng.</div></div>
+ <div><div class="card" id="V4" style="height:250px;background:#fff"></div><div class="cap">Đen một màu <span class="tag p">đề xuất</span></div><div class="note">Hoá đơn in nhiệt, con dấu, photo trắng đen. Bỏ má hồng.</div></div>
+</div>
+</section>
+
+<!-- 05 MÀU -->
+<section>
+<div class="sec"><span class="num">05</span><h2>Màu</h2></div>
+<p class="lead">Một màu chủ đạo là đỏ Hustle, đặt trên nền vàng bơ ấm. Má hồng chỉ dùng cho gương mặt, không dùng cho chữ.</p>
+<div class="grid g3">
+ <div class="sw"><div class="chip" style="background:#C4261D;color:#FBF5E8"><span>Đỏ Hustle</span></div><div class="info"><b>Màu chính</b><br><span class="mono">#C4261D · RGB 196 38 29</span><br>Logo, tiêu đề, nút bấm, chi tiết nhấn.</div></div>
+ <div class="sw"><div class="chip" style="background:#FAF4D3;color:#C4261D"><span>Vàng bơ</span></div><div class="info"><b>Nền chính</b><br><span class="mono">#FAF4D3 · RGB 250 244 211</span><br>Nền menu, poster, ảnh bìa, bao bì.</div></div>
+ <div class="sw"><div class="chip" style="background:#FBF5E8;color:#C4261D;box-shadow:inset 0 0 0 1.5px #0000000d"><span>Kem</span></div><div class="info"><b>Chữ trên nền đỏ</b><br><span class="mono">#FBF5E8 · RGB 251 245 232</span><br>Logo đảo màu, nền phụ, giấy.</div></div>
+ <div class="sw"><div class="chip" style="background:#3A1F1A;color:#FBF5E8"><span>Nâu đậm</span></div><div class="info"><b>Chữ thân bài</b><br><span class="mono">#3A1F1A · RGB 58 31 26</span><br>Nội dung menu, giá, thông tin dài.</div></div>
+ <div class="sw"><div class="chip" style="background:#F08A7E;color:#3A1F1A"><span>Má hồng sáng</span></div><div class="info"><b>Trang trí</b><br><span class="mono">#F08A7E · RGB 240 138 126</span><br>Má hồng khi logo đỏ trên nền sáng.</div></div>
+ <div class="sw"><div class="chip" style="background:#F6B3A3;color:#3A1F1A"><span>Má hồng nhạt</span></div><div class="info"><b>Trang trí</b><br><span class="mono">#F6B3A3 · RGB 246 179 163</span><br>Má hồng khi logo kem trên nền đỏ.</div></div>
+</div>
+<div class="cap" style="margin-top:30px">Tỉ lệ gợi ý trên một ấn phẩm</div>
+<div class="bar"><div style="flex:55;background:#FAF4D3;color:#C4261D">Vàng bơ 55%</div><div style="flex:25;background:#C4261D;color:#FBF5E8">Đỏ 25%</div><div style="flex:12;background:#FBF5E8;color:#3A1F1A">Kem 12%</div><div style="flex:6;background:#3A1F1A;color:#FBF5E8">Nâu</div><div style="flex:2;background:#F08A7E"></div></div>
+<div class="cap" style="margin-top:30px">Cặp màu chữ / nền (độ tương phản WCAG)</div>
+<table>
+<tr><th>Cặp</th><th>Tỉ lệ</th><th>Dùng cho</th></tr>
+<tr><td><span class="pill" style="background:#FAF4D3;color:#3A1F1A">Nâu trên vàng bơ</span></td><td>13,6 : 1</td><td class="ok">✓ mọi cỡ chữ, kể cả chữ nhỏ</td></tr>
+<tr><td><span class="pill" style="background:#FAF4D3;color:#C4261D">Đỏ trên vàng bơ</span></td><td>5,2 : 1</td><td class="ok">✓ logo, tiêu đề, chữ ≥ 14 px</td></tr>
+<tr><td><span class="pill" style="background:#C4261D;color:#FBF5E8">Kem trên đỏ</span></td><td>5,3 : 1</td><td class="ok">✓ logo, tiêu đề, chữ ≥ 14 px</td></tr>
+<tr><td><span class="pill" style="background:#C4261D;color:#F6B3A3">Má hồng trên đỏ</span></td><td>3,3 : 1</td><td class="no">✕ chỉ trang trí, không làm chữ</td></tr>
+<tr><td><span class="pill" style="background:#3A1F1A;color:#C4261D">Đỏ trên nâu</span></td><td>2,6 : 1</td><td class="no">✕ không dùng</td></tr>
+</table>
+<div class="note" style="margin-top:10px">Mã CMYK / Pantone chưa chốt: cần in thử với nhà in rồi mới ghi vào đây.</div>
+</section>
+
+<!-- 06 FONT -->
+<section>
+<div class="sec"><span class="num">06</span><h2>Font chữ</h2></div>
+<p class="lead">Ba font miễn phí (giấy phép SIL OFL), tải trên Google Fonts. Mỗi font một việc.</p>
+<div class="spec"><div class="who"><b>Grandstander</b>Đậm 900 (Black)<br>Logo, tiêu đề lớn, tên món nổi bật. Có đủ dấu tiếng Việt.</div>
+ <div><div style="font:900 64px/1.05 Grandstander;color:var(--red)">Cà phê muối</div><div style="font:900 34px/1.3 Grandstander;color:var(--red)">Trà sữa trân châu · Học xuyên đêm</div><div style="font:800 20px/1.6 Grandstander;color:var(--brown);letter-spacing:.02em">AĂÂBCDĐEÊGHIKLMNOÔƠPQRSTUƯVXY · aăâbcdđeêghi · 0123456789</div></div></div>
+<div class="spec"><div class="who"><b>Fredoka</b>Đậm 600, chữ thường, giãn 0,14em<br>Chỉ dùng cho “study cafe” và nhãn tiếng Anh ngắn.<div class="warn">Không có dấu tiếng Việt (thiếu ă, đ, ơ, ư…). Không dùng cho chữ tiếng Việt.</div></div>
+ <div><div style="font:600 46px/1.2 Fredoka;color:var(--red);letter-spacing:.14em">study cafe</div><div style="font:600 22px/1.8 Fredoka;color:var(--brown);letter-spacing:.14em">wifi · open late · hot · iced</div></div></div>
+<div class="spec"><div class="who"><b>Nunito</b> <span class="tag p" style="margin:0 0 8px">đề xuất</span><br>Thường 400, đậm 800<br>Chữ thân bài: menu, giá, giờ mở cửa, bài đăng. Nét tròn hợp với logo, đủ dấu tiếng Việt.</div>
+ <div><div style="font:800 26px/1.4 Nunito;color:var(--brown)">Bạc xỉu đá — 32.000đ</div><div style="font:400 19px/1.6 Nunito;color:var(--brown)">Không gian yên tĩnh, ổ cắm ở mọi bàn. Trân châu nấu mới mỗi sáng. Được ngồi học lâu, cứ gọi thêm nước khi cần nhé.</div><div style="font:400 13px/1.6 Nunito;color:var(--muted)">(Giá và câu chữ chỉ là ví dụ minh hoạ.)</div></div></div>
+<table>
+<tr><th>Cấp</th><th>Font</th><th>Cỡ gợi ý (menu A4)</th></tr>
+<tr><td>Tiêu đề trang</td><td>Grandstander 900</td><td>36–48 pt</td></tr>
+<tr><td>Tên nhóm món</td><td>Grandstander 900</td><td>20–24 pt</td></tr>
+<tr><td>Tên món, giá</td><td>Nunito 800</td><td>12–14 pt</td></tr>
+<tr><td>Mô tả, ghi chú</td><td>Nunito 400</td><td>9–11 pt</td></tr>
+</table>
+</section>
+
+<!-- 07 KHÔNG ĐƯỢC LÀM -->
+<section class="dont">
+<div class="sec"><span class="num">07</span><h2>Không được làm</h2></div>
+<p class="lead">Luôn dùng file logo gốc. Không vẽ lại, gõ lại hay chỉnh sửa logo.</p>
+<div class="grid g3">
+ <div><div class="card" id="D1"><div class="x">✕</div></div><div class="cap">Kéo giãn, bóp méo</div><div class="note">Luôn giữ nguyên tỉ lệ khi phóng to, thu nhỏ.</div></div>
+ <div><div class="card" id="D2"><div class="x">✕</div></div><div class="cap">Gõ lại bằng font khác</div><div class="note">Logo là hình, không phải chữ gõ.</div></div>
+ <div><div class="card" id="D3"><div class="x">✕</div></div><div class="cap">Đổi màu ngoài bảng màu</div><div class="note">Chỉ dùng bốn phiên bản ở mục 04.</div></div>
+ <div><div class="card" id="D4"><div class="x">✕</div></div><div class="cap">Bỏ gương mặt</div><div class="note">Mắt ∧ là phần cốt lõi của logo.</div></div>
+ <div><div class="card" id="D5" style="background:#3A1F1A"><div class="x">✕</div></div><div class="cap">Đặt trên nền thiếu tương phản</div><div class="note">Đỏ trên nâu, hoặc trên ảnh rối, đều khó đọc.</div></div>
+ <div><div class="card" id="D6"><div class="x">✕</div></div><div class="cap">Thêm bóng đổ, hiệu ứng</div><div class="note">Không đổ bóng, viền nổi, chuyển màu, xoay.</div></div>
+</div>
+</section>
+
+<footer>Hustle Up Study Cafe · Hướng dẫn nhận diện 1.0 · Logo dựng từ font Grandstander và Fredoka (SIL OFL). Trước khi in lớn và đăng ký nhãn hiệu, cần designer vẽ lại thành file vector. Mục gắn nhãn “đề xuất” chưa được chốt.</footer>
+
+<script src="scripts/logo-lib.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+fontsReady().then(()=>{
+  logoH($('cover'),150,{});
+  // concept
+  (()=>{const card=$('i1'),st=stage(card);const o=track(word(st,'u',{size:120,family:'Grandstander',weight:900,color:C.red,bg:C.butter}));centerXY(st,o,0,26);
+    const g=glyph(st,o,0);face(st,g,{color:C.red,blush:null,sw:12,spread:.56,ew:.29,lift:.25});
+    const W=g.r-g.l,cx=(g.l+g.r)/2,y=g.top-(g.bot-g.top)*.25;
+    addSvg(st,[cx-W*.28,cx+W*.28].map(x=>`<path d="M${x},${y-W*.16} L${x},${y-W*.62}" stroke="${C.blushL}" stroke-width="4" stroke-dasharray="2 7" stroke-linecap="round" fill="none"/><path d="M${x-8},${y-W*.52} L${x},${y-W*.64} L${x+8},${y-W*.52}" stroke="${C.blushL}" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`).join(''));})();
+  markU($('i2'),110,{col:C.red,bg:C.butter,blush:C.blushL,plate:null});
+  (()=>{const card=$('i3'),st=stage(card);const o=track(word(st,'Hus',{size:80,family:'Grandstander',weight:900,color:C.red,bg:'#FFFDF4',sc:[1.2,1,1],ov:-0.07}));o.spans.forEach(s=>s.style.textShadow=ring(7,'#FFFDF4')+',0 0 0 #000');o.spans.forEach(s=>s.style.filter='drop-shadow(0 2px 3px #3A1F1A30)');centerXY(st,o,0,4);})();
+  // logo set
+  logoH($('L1'),112);
+  logoV($('L2'),68);
+  markHu($('L3'),120);
+  markU($('L4'),118,{col:C.cream,bg:C.red,blush:C.blushR,plate:C.red,plateSize:1.55});
+  // clear space
+  function clear(card,res){const st=res.st,o=res.o;const cr=card.getBoundingClientRect();
+    const gu=sbox(glyph(st,o,1));const x=gu.bot-gu.top; // đơn vị x = chiều cao chữ u
+    let B=inkBox(st);const dX=cr.left+cr.width/2-(B.l+B.r)/2,dY=cr.top+cr.height/2-(B.t+B.b)/2;
+    st.style.transform+=` translate(${dX}px,${dY}px)`;B=inkBox(st);
+    const so=st.getBoundingClientRect();const ox=so.left-cr.left,oy=so.top-cr.top;
+    const L=B.l-cr.left,T=B.t-cr.top,W=B.w,H=B.h;
+    const r=(l,t,w,h,dash,c)=>`<rect x="${l}" y="${t}" width="${w}" height="${h}" fill="none" stroke="${c}" stroke-width="1.5" ${dash?'stroke-dasharray="6 5"':''}/>`;
+    let s=`<rect x="${L-x}" y="${T-x}" width="${W+2*x}" height="${H+2*x}" fill="${C.red}" opacity=".07"/>`+r(L-x,T-x,W+2*x,H+2*x,1,C.red)+r(L,T,W,H,0,'#3A1F1A55');
+    const ux=gu.r+ox+5,ut=gu.top+oy,ub=gu.bot+oy;
+    s+=`<g stroke="${C.red}" stroke-width="2" stroke-linecap="round">
+      <line x1="${L-x}" y1="${T+H/2}" x2="${L}" y2="${T+H/2}"/><line x1="${L+W}" y1="${T+H/2}" x2="${L+W+x}" y2="${T+H/2}"/>
+      <line x1="${L+W/2}" y1="${T-x}" x2="${L+W/2}" y2="${T}"/><line x1="${L+W/2}" y1="${T+H}" x2="${L+W/2}" y2="${T+H+x}"/></g>`;
+    s+=`<g font-family="Nunito" font-weight="900" font-size="15" fill="${C.red}">
+      <text x="${L-x/2}" y="${T+H/2-7}" text-anchor="middle">x</text><text x="${L+W+x/2}" y="${T+H/2-7}" text-anchor="middle">x</text>
+      <text x="${L+W/2+7}" y="${T-x/2+5}">x</text><text x="${L+W/2+7}" y="${T+H+x/2+5}">x</text></g>`;
+    const d=addSvg(card,s);d.style.zIndex=200;}
+  clear($('CS1'),logoH($('CS1'),66));
+  clear($('CS2'),markHu($('CS2'),118));
+  // small sizes — đúng cỡ thật
+  const sm=$('SM');
+  [[96,'Hu 96 px',0],[64,'Hu 64 px',0],[48,'Hu 48 px',0],[40,'Tối giản 40 px',1],[32,'Tối giản 32 px',1],[24,'Tối giản 24 px',1],[16,'Tối giản 16 px',1],[32,'Thường 32 px ✕',2]].forEach(([px,lb,mode])=>{
+    const it=document.createElement('div');it.className='it';const c=document.createElement('div');c.className='card';c.style.cssText=`width:${px}px;height:${px}px;border-radius:0;overflow:visible;margin:0 auto 8px`;it.appendChild(c);it.appendChild(document.createTextNode(lb));sm.appendChild(it);
+    markHu(c,px/1.78,{col:C.cream,bg:C.red,blush:C.blushR,plate:C.red,plateSize:1.78,simple:mode===1});
+    if(mode===2)it.style.color=C.red;});
+  // color versions
+  logoH($('V1'),76);
+  logoH($('V2'),76,{col:C.cream,bg:C.red,blush:C.blushR});
+  logoH($('V3'),76,{col:C.brown,bg:C.cream,blush:null});
+  logoH($('V4'),76,{col:'#111111',bg:'#ffffff',blush:null});
+  // don'ts
+  (()=>{const r=logoH($('D1'),40);r.st.style.transform=' scale(1.3,.72) '+r.st.style.transform;})();
+  (()=>{const d=document.createElement('div');d.textContent='Hustle Up';d.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 52px Georgia,serif;color:#C4261D';$('D2').appendChild(d);})();
+  logoH($('D3'),50,{col:'#2F6FD6',bg:C.butter,blush:'#9EC1FF'});
+  logoH($('D4'),50,{face:false});
+  logoH($('D5'),50,{col:C.red,bg:'#3A1F1A'});
+  (()=>{const card=$('D6');card.style.background='linear-gradient(135deg,#FAF4D3,#F6DDA6)';const r=logoH(card,42);r.st.style.filter='drop-shadow(5px 7px 0 #3A1F1A) drop-shadow(0 0 10px #F08A7E)';r.st.style.transform+=' rotate(-10deg)';})();
+  document.body.dataset.done=1;
+});
+</script>
+</body></html>

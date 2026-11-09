@@ -37,16 +37,25 @@ Tóm tắt các quyết định đã chốt, để phiên làm việc sau tiếp
 - Fredoka (Google Fonts, OFL), chữ "study cafe".
 - File font nằm trong `source/fonts/`.
 
+## Đã làm (09/11/2026)
+- **Hướng dẫn nhận diện** (brand-studio): `final/huong-dan-nhan-dien.png` và `.pdf`. 7 mục: ý tưởng, bộ logo, khoảng trống & cỡ tối thiểu, phiên bản màu, màu (kèm độ tương phản), font, không được làm.
+- **PNG từng logo** nền trong suốt, x3: `final/logo/` (ngang, dọc, Hu, Hu tròn/vuông/tối giản, gương mặt u). Viền sticker mang màu nền dự kiến, nên bản đỏ đặt trên vàng bơ, bản kem đặt trên đỏ.
+- **`BRAND.md`** (brand-md, spec 0.3.0): chiến lược, giọng văn, màu, font, logo, quy tắc. Tên mục giữ tiếng Anh, nội dung tiếng Việt.
+- Phát hiện: **Fredoka không có dấu tiếng Việt** → chỉ dùng cho "study cafe". Đề xuất **Nunito** (OFL, đủ dấu) cho chữ thân bài; file trong `source/fonts/`.
+
+## Còn chờ chủ quán duyệt
+- Các mục ghi "đề xuất" trong `BRAND.md` và trang hướng dẫn: định vị, tagline "Học chăm, ngồi vui", giọng văn, font Nunito, bản một màu (nâu, đen), "Hu" tối giản, cỡ tối thiểu.
+- Tuyên bố công khai (giờ mở cửa, ổ cắm, wifi, "trân châu nấu mỗi sáng").
+
 ## Việc tiếp theo
-1. Dùng plugin **brand-studio** (identity system, brand review) để gom logo, màu, font và quy tắc dùng thành brand guideline.
-2. Dùng plugin **brand-md** để tạo `BRAND.md` gửi designer.
-3. Tinh chỉnh biểu tượng "Hu" nếu cần, làm bản favicon đơn giản (bỏ má hồng, mắt dày hơn) cho cỡ 16–32 px.
-4. Mockup lên ly, túi, bảng hiệu.
-5. Nhờ designer vẽ lại thành vector (AI/SVG) trước khi in và đăng ký thương hiệu.
+1. Chủ quán duyệt các mục "đề xuất" ở trên.
+2. Mockup lên ly, túi, bảng hiệu (có thể làm `DESIGN.md` cho menu / bảng hiệu).
+3. Nhờ designer vẽ lại thành vector (AI/SVG) trước khi in và đăng ký thương hiệu; chốt mã CMYK/Pantone khi in thử.
 
 ## Ghi chú kỹ thuật
 - Các file HTML trong `source/` dựng logo bằng font thật và SVG. Mở trong trình duyệt là xem được.
 - Xuất lại ảnh PNG (cần Playwright): `cd branding/hustle-up/source && node scripts/brand.js` (tương tự `hu.js`, `face9.js`).
+- Hướng dẫn nhận diện: `node scripts/guideline.js`; PNG từng logo: `node scripts/export.js`. Cả hai dùng chung `scripts/logo-lib.js`.
 - `explorations/`: các hướng đã thử và bỏ (pixel 8-bit, Cosy Kiln, Tate, tem gợn sóng, tem tròn...).
 - `reference/logo-cu.jpg`: logo hiện tại của quán.
 - Không dùng hình từ ảnh tham khảo của bên thứ ba trong bản chốt. Các bản thử dùng nguyên biểu tượng của người khác đã bỏ.
